@@ -10,7 +10,7 @@
 @*************************************************************************@
  */
 
-SELECT l.`id` AS offset_id, u.`id`, u.`about`, u.`followers`, u.`posts`, u.`avatar`, u.`last_active`, u.`username`, u.`fname`, u.`lname`, u.`email`, u.`verified`, u.`follow_privacy` FROM `<?php echo($data['t_likes']); ?>` l
+SELECT l.`id` AS offset_id, l.`rate`, u.`id`, u.`about`, u.`followers`, u.`posts`, u.`avatar`, u.`last_active`, u.`username`, u.`fname`, u.`lname`, u.`email`, u.`verified`, u.`follow_privacy` FROM `<?php echo($data['t_likes']); ?>` l
 	
 	INNER JOIN `<?php echo($data['t_users']); ?>` u ON l.`user_id` = u.`id`
 

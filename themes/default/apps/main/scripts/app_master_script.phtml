@@ -591,6 +591,11 @@
                     }).done(function (data) {
                         if (data.status == 200) {
                             $('div[data-app="black-hole"]').append($(data.html)).find('div[data-app="post-likes-list"]').modal('show');
+                            $('.post-total-rate').rateit({
+                                ispreset: true,
+                                readonly: true,
+                                mode: "font"
+                            });
                         } else {
                             _smc.errorMSG();
                         }
@@ -1311,8 +1316,12 @@
         $('#add_post_rate').on('shown.bs.modal', function (e) {
             $('#rate_post_input').rateit('mode', 'font');
         });
-        $("#rate_post_input").bind('rated', function (event, value) { $('#rate_val').text((value * 1).toFixed(1)); });
-        $("#rate_post_input").bind('reset', function () { $('#rate_val').text(0); });
+        $("#rate_post_input").bind('rated', function (event, value) {
+            $('#rate_val').text((value * 1).toFixed(1));
+        });
+        $("#rate_post_input").bind('reset', function () {
+            $('#rate_val').text(0);
+        });
     });
 </script>
 

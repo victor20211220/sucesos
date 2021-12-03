@@ -14,6 +14,9 @@
 		<p>
 			<?php echo cl_croptxt($cl['li']['about'], 120, '...'); ?>
 		</p>
+        <div class="rateit post-total-rate" data-rateit-mode="font" data-rateit-value="<?php echo $cl['li']['rate'] ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+        <span class="rateit-score"><?php echo $cl['li']['rate'] ?></span>
+
 		<?php if (empty($cl['li']['is_user'])): ?>
 			<?php if ($cl['li']['follow_privacy'] == 'approved'): ?>
 				<?php if (not_empty($cl['li']['is_following'])): ?>
