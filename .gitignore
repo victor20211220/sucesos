@@ -1,8 +1,9 @@
 /upload
 /site_backups
-/Script documentation/*
+/Script documentation
 /Script updates
+/api_docs
+/core/settings.php
 .htaccess
 .ftpquota
 php.ini
-/api_docs
