@@ -9047,8 +9047,15 @@ body.cl-app-wallet main.main-content-container div.main-content-container-inner 
           color: var(--smc-main-text-color-2); }
         .follow-area{
           display: inline-block;
+          margin-left: 20px;
         }
+.d-inline-block{
+  display:inline-block;
+}
 
+.d-flex{
+  display:flex;
+}
 /* ===================================================== */
 
 /*# sourceMappingURL=master.styles.css.map */

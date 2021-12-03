@@ -43,59 +43,65 @@
                                         <img src="<?php echo($row['avatar']); ?>" alt="avatar">
                                     </div>
                                     <div class="user-info-holder">
-                                        <h4 data-uinfo-lbox="<?php echo($row['id']); ?>" data-toggle="popover"
-                                            data-placement="top">
+                                        <div class="d-flex">
+                                            <h4 data-uinfo-lbox="<?php echo($row['id']); ?>" data-toggle="popover"
+                                                data-placement="top">
 											<span class="user-name-holder <?php if ($row['verified'] == '1') {
                                                 echo('verified-badge');
                                             } ?>">
 												<?php echo cl_croptxt($row['name'], 15, '..'); ?>
 											</span>
-                                        </h4>
-                                        <span class="followers">
-											<b><?php echo($row['followers']); ?></b> <?php echo cl_translate('Followers'); ?>
-										</span>
-                                        <div class="follow-area">
-                                            <?php $is_following = cl_is_following($me['id'], $row['id']);
+                                            </h4>
+                                            <div class="follow-area">
+                                                <?php $is_following = cl_is_following($me['id'], $row['id']);
                                                 if ($row['follow_privacy'] == 'approved'): ?>
-                                                <?php if (not_empty($is_following)): ?>
-                                                    <button onclick="SMColibri.req_follow(this);"
-                                                            class="btn btn-custom btn-block main-inline md"
-                                                            data-action="unfollow"
-                                                            data-id="<?php echo($row['id']); ?>">
-                                                        <?php echo cl_translate("Unfollow"); ?>
-                                                    </button>
-                                                <?php elseif (not_empty($row['follow_requested'])): ?>
-                                                    <button onclick="SMColibri.req_follow(this);"
-                                                            class="btn btn-custom btn-block main-inline md"
-                                                            data-action="cancel"
-                                                            data-id="<?php echo($row['id']); ?>">
-                                                        <?php echo cl_translate("Pending"); ?>
-                                                    </button>
+                                                    <?php if (not_empty($is_following)): ?>
+                                                        <button onclick="SMColibri.req_follow(this);"
+                                                                class="btn btn-custom btn-block main-outline md"
+                                                                data-action="unfollow"
+                                                                data-id="<?php echo($row['id']); ?>">
+                                                            <?php echo cl_translate("Unfollow"); ?>
+                                                        </button>
+                                                    <?php elseif (not_empty($row['follow_requested'])): ?>
+                                                        <button onclick="SMColibri.req_follow(this);"
+                                                                class="btn btn-custom btn-block main-outline md"
+                                                                data-action="cancel"
+                                                                data-id="<?php echo($row['id']); ?>">
+                                                            <?php echo cl_translate("Pending"); ?>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button onclick="SMColibri.req_follow(this);"
+                                                                class="btn btn-custom btn-block main-outline md"
+                                                                data-action="follow"
+                                                                data-id="<?php echo($row['id']); ?>">
+                                                            <?php echo cl_translate("Follow"); ?>
+                                                        </button>
+                                                    <?php endif; ?>
                                                 <?php else: ?>
-                                                    <button onclick="SMColibri.req_follow(this);"
-                                                            class="btn btn-custom btn-block main-inline md"
-                                                            data-action="follow"
-                                                            data-id="<?php echo($row['id']); ?>">
-                                                        <?php echo cl_translate("Follow"); ?>
-                                                    </button>
+                                                    <?php if (not_empty($row['is_following'])): ?>
+                                                        <button onclick="SMColibri.follow(this);"
+                                                                class="btn btn-custom btn-block main-outline md"
+                                                                data-action="unfollow"
+                                                                data-id="<?php echo($row['id']); ?>">
+                                                            <?php echo cl_translate("Unfollow"); ?>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <button onclick="SMColibri.follow(this);"
+                                                                class="btn btn-custom btn-block main-outline md"
+                                                                data-action="follow"
+                                                                data-id="<?php echo($row['id']); ?>">
+                                                            <?php echo cl_translate("Follow"); ?>
+                                                        </button>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
-                                            <?php else: ?>
-                                                <?php if (not_empty($row['is_following'])): ?>
-                                                    <button onclick="SMColibri.follow(this);"
-                                                            class="btn btn-custom btn-block main-inline md"
-                                                            data-action="unfollow"
-                                                            data-id="<?php echo($row['id']); ?>">
-                                                        <?php echo cl_translate("Unfollow"); ?>
-                                                    </button>
-                                                <?php else: ?>
-                                                    <button onclick="SMColibri.follow(this);"
-                                                            class="btn btn-custom btn-block main-inline md"
-                                                            data-action="follow"
-                                                            data-id="<?php echo($row['id']); ?>">
-                                                        <?php echo cl_translate("Follow"); ?>
-                                                    </button>
-                                                <?php endif; ?>
-                                            <?php endif; ?>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex">
+                                                <span class="followers">
+                                                    <b><?php echo($row['followers']); ?></b> <?php echo cl_translate('Followers'); ?>
+                                                </span>
+
                                         </div>
                                     </div>
                                 </div>
