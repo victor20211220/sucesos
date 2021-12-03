@@ -217,6 +217,7 @@ function cl_get_media_placeholder($media = ""){
 }
 
 function cl_send_mail($data = array()) {
+    return;
     global $cl, $db;
 
     try {
@@ -806,6 +807,13 @@ function cl_is_ajax() {
 function cl_number($number = null) {
     if (is_numeric($number)) {
         return number_format($number, 0, '',', ');
+    }
+    return 0;
+}
+
+function cl_float($number = null) {
+    if (is_numeric($number)) {
+        return number_format($number, 1, '.','');
     }
 
     return 0;

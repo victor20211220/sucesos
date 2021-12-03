@@ -44,7 +44,6 @@ if (mysqli_connect_errno()) {
         die();
     }
 }
-
 $me            = array();
 $db_connection = $mysqli;
 $query         = $mysqli->query("SET NAMES utf8");

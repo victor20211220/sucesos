@@ -683,6 +683,20 @@ function cl_has_liked($user_id = false, $post_id = false) {
 	return (($qr > 0) ? true : false);
 }
 
+function cl_get_rate($user_id = false, $post_id = false) {
+	global $db, $cl;
+
+	if (not_num($user_id) || not_num($post_id)) {
+		return false;
+	}
+
+	$db = $db->where('user_id', $user_id);
+	$db = $db->where('pub_id', $post_id);
+	$qr = $db->getValue(T_LIKES, 'rate');
+
+	return $qr;
+}
+
 function cl_has_saved($user_id = false, $post_id = false) {
 	global $db, $cl;
 

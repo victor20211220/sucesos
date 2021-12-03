@@ -58,7 +58,6 @@
 			</div>
 		</div>
 		<?php if (empty($cl['lbox_usr']['owner'])): ?>
-			<div class="user-info-lbox__user-ctrls">
 				<?php if ($cl['lbox_usr']['follow_privacy'] == 'approved'): ?>
 					<?php if (not_empty($cl['lbox_usr']['is_following'])): ?>
 						<button onclick="SMColibri.req_follow(this);" class="btn btn-custom btn-block main-inline md" data-action="unfollow" data-id="<?php echo($cl['lbox_usr']['id']); ?>">
@@ -84,7 +83,6 @@
 						</button>
 					<?php endif; ?>
 				<?php endif; ?>
-			</div>
 		<?php endif; ?>
 	</div>
 </div>

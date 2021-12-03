@@ -355,25 +355,27 @@
 								</a>
 							</button>
 
-							<?php if (empty($cl['li']['has_liked'])): ?>
-								<button class="ctrls-item" onclick="SMColibri.like_post('<?php echo $cl['li']['id']; ?>', this);">
+							<?php $post_id = $cl['li']['id']; if (empty($cl['li']['has_liked'])): ?>
+								<button class="ctrls-item" data-post-id="<?php echo $post_id;?>" onclick="SMColibri.like_post('<?php echo $post_id; ?>', false);">
 									<span class="icon">
 										<?php echo cl_ikon('favourite'); ?>
 									</span>
-									<span class="num" data-an="likes-count">
+									<span class="num" data-an="likes-count" data-post-id="<?php echo $post_id; ?>">
 										<?php echo $cl['li']['likes_count']; ?>
 									</span>
 								</button>
 							<?php else: ?>
-								<button class="ctrls-item liked" onclick="SMColibri.like_post('<?php echo $cl['li']['id']; ?>', this);">
+								<button class="ctrls-item liked" data-post-id="<?php echo $post_id;?>" onclick="SMColibri.like_post('<?php echo $post_id; ?>', false);">
 									<span class="icon">
 										<?php echo cl_ikon('favourite'); ?>
 									</span>
-									<span class="num" data-an="likes-count">
+									<span class="num" data-an="likes-count" data-post-id="<?php echo $post_id; ?>">
 										<?php echo $cl['li']['likes_count']; ?>
 									</span>
 								</button>
 							<?php endif; ?>
+                            <div class="rateit post-total-rate" data-rateit-mode="font" data-rateit-value="<?php echo $cl['li']['total_rate'] ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                            <span class="num"><?php echo $cl['li']['total_rate'] ?></span>
 							
 							<?php if (empty($cl['li']['has_reposted'])): ?>
 								<button onclick="SMColibri.repost('<?php echo $cl['li']['id']; ?>', this);" class="ctrls-item" data-an="repost-ctrl">

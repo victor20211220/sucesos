@@ -863,6 +863,7 @@ else if($action == 'like_post') {
         $data['err_code'] = 0;
         $data['status']   = 400;
         $post_id          = fetch_or_get($_POST['id'], 0);
+        $rate         = fetch_or_get($_POST['rate'], 0);
 
         if (is_posnum($post_id)) {
             $post_data = cl_raw_post_data($post_id);
@@ -872,15 +873,19 @@ else if($action == 'like_post') {
                     $db->insert(T_LIKES, array(
                         'pub_id'  => $post_id,
                         'user_id' => $me['id'],
+                        'rate'    => $rate,
                         'time'    => time()
                     ));
 
-                    $likes_count         = ($post_data['likes_count'] += 1);
+                    $likes_count         = $post_data['likes_count'] + 1;
+                    $total_rate = ($post_data['likes_count'] * $post_data['total_rate'] + $rate) / $likes_count;
                     $data['status']      = 200;
                     $data['likes_count'] = $likes_count;
+                    $data['total_rate'] = $total_rate;
 
                     cl_update_post_data($post_id, array(
-                        'likes_count' => $likes_count
+                        'likes_count' => $likes_count,
+                        'total_rate' => $total_rate
                     ));
 
                     if ($post_data['user_id'] != $me['id']) {
@@ -892,15 +897,18 @@ else if($action == 'like_post') {
                     }
                 }
                 else {
+                    $likes_count         = $post_data['likes_count'] - 1;
+                    $total_rate = $likes_count == 0 ? 0 : ($post_data['total_rate'] * $post_data['likes_count'] -  cl_get_rate($me['id'], $post_id)) / $likes_count;
                     $db                  = $db->where('pub_id', $post_id);
                     $db                  = $db->where('user_id', $me['id']);
                     $qr                  = $db->delete(T_LIKES);
                     $data['status']      = 200;
-                    $likes_count         = ($post_data['likes_count'] -= 1);
-                    $data['likes_count'] = $likes_count;
 
+                    $data['likes_count'] = $likes_count;
+                    $data['total_rate'] = $total_rate;
                     cl_update_post_data($post_id, array(
-                        'likes_count' => $likes_count
+                        'likes_count' => $likes_count,
+                        'total_rate' => $total_rate,
                     ));
 
                     $db = $db->where('notifier_id', $me['id']);

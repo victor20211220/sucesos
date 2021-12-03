@@ -2135,7 +2135,7 @@ body {
                       color: var(--smc-main-text-color);
                       white-space: nowrap; }
                     body main.main-content-container div.main-content-container-inner div.right-sb-container div.sidebar__inner div.follow-suggestion div.follow-suggestion__body div.follow-suggestion__item div.flex-cr div.user-info-holder span.followers {
-                      display: block;
+                      display: inline-block;
                       text-decoration: none;
                       color: var(--smc-main-text-color-2);
                       font-size: 12px;
@@ -9045,6 +9045,9 @@ body.cl-app-wallet main.main-content-container div.main-content-container-inner 
           font-size: 13px;
           line-height: 20px;
           color: var(--smc-main-text-color-2); }
+        .follow-area{
+          display: inline-block;
+        }
 
 /* ===================================================== */
 

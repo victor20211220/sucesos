@@ -38,7 +38,6 @@ if ($app_stat == true) {
 else {
 	include_once("apps/native/http/err404/content.php");
 }
-
 if ($spa_load == '1') {
 
 	header('Content-Type: application/json');
