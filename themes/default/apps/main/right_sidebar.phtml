@@ -52,6 +52,7 @@
 												<?php echo cl_croptxt($row['name'], 15, '..'); ?>
 											</span>
                                             </h4>
+                                            <?php if ($cl['is_logged']): ?>
                                             <div class="follow-area">
                                                 <?php $is_following = cl_is_following($me['id'], $row['id']);
                                                 if ($row['follow_privacy'] == 'approved'): ?>
@@ -95,6 +96,7 @@
                                                     <?php endif; ?>
                                                 <?php endif; ?>
                                             </div>
+                                            <?php endif;?>
                                         </div>
 
                                         <div class="d-flex">
