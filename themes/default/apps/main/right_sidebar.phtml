@@ -57,21 +57,21 @@
                                                 if ($row['follow_privacy'] == 'approved'): ?>
                                                     <?php if (not_empty($is_following)): ?>
                                                         <button onclick="SMColibri.req_follow(this);"
-                                                                class="btn btn-custom btn-block main-outline md"
+                                                                class="btn btn-custom btn-block main-inline md"
                                                                 data-action="unfollow"
                                                                 data-id="<?php echo($row['id']); ?>">
                                                             <?php echo cl_translate("Unfollow"); ?>
                                                         </button>
                                                     <?php elseif (not_empty($row['follow_requested'])): ?>
                                                         <button onclick="SMColibri.req_follow(this);"
-                                                                class="btn btn-custom btn-block main-outline md"
+                                                                class="btn btn-custom btn-block main-inline md"
                                                                 data-action="cancel"
                                                                 data-id="<?php echo($row['id']); ?>">
                                                             <?php echo cl_translate("Pending"); ?>
                                                         </button>
                                                     <?php else: ?>
                                                         <button onclick="SMColibri.req_follow(this);"
-                                                                class="btn btn-custom btn-block main-outline md"
+                                                                class="btn btn-custom btn-block main-inline md"
                                                                 data-action="follow"
                                                                 data-id="<?php echo($row['id']); ?>">
                                                             <?php echo cl_translate("Follow"); ?>
@@ -80,14 +80,14 @@
                                                 <?php else: ?>
                                                     <?php if (not_empty($row['is_following'])): ?>
                                                         <button onclick="SMColibri.follow(this);"
-                                                                class="btn btn-custom btn-block main-outline md"
+                                                                class="btn btn-custom btn-block main-inline md"
                                                                 data-action="unfollow"
                                                                 data-id="<?php echo($row['id']); ?>">
                                                             <?php echo cl_translate("Unfollow"); ?>
                                                         </button>
                                                     <?php else: ?>
                                                         <button onclick="SMColibri.follow(this);"
-                                                                class="btn btn-custom btn-block main-outline md"
+                                                                class="btn btn-custom btn-block main-inline md"
                                                                 data-action="follow"
                                                                 data-id="<?php echo($row['id']); ?>">
                                                             <?php echo cl_translate("Follow"); ?>

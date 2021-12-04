@@ -1,6 +1,12 @@
 .follow-area {
     display: inline-block;
-    margin-left: 20px;
+    position: absolute;
+    right: 0;
+}
+.follow-suggestion__body .follow-area button{
+    background: black !important;
+    border: black !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 10px 0px !important;
 }
 .rateit-score{
     vertical-align: super;
