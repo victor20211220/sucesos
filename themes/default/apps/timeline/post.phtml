@@ -375,7 +375,7 @@
 								</button>
 							<?php endif; ?>
                             <div class="rateit post-total-rate" data-rateit-mode="font" data-rateit-value="<?php echo $cl['li']['total_rate'] ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                            <span class="num"><?php echo $cl['li']['total_rate'] ?></span>
+                            <span class="num"><?php echo cl_float($cl['li']['total_rate']); ?></span>
 							
 							<?php if (empty($cl['li']['has_reposted'])): ?>
 								<button onclick="SMColibri.repost('<?php echo $cl['li']['id']; ?>', this);" class="ctrls-item" data-an="repost-ctrl">

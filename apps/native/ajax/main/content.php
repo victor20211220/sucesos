@@ -863,7 +863,7 @@ else if($action == 'like_post') {
         $data['err_code'] = 0;
         $data['status']   = 400;
         $post_id          = fetch_or_get($_POST['id'], 0);
-        $rate         = fetch_or_get($_POST['rate'], 0);
+        $rate         = (int)(fetch_or_get($_POST['rate'], 0));
 
         if (is_posnum($post_id)) {
             $post_data = cl_raw_post_data($post_id);
@@ -878,6 +878,13 @@ else if($action == 'like_post') {
                     ));
 
                     $likes_count         = $post_data['likes_count'] + 1;
+                    $rates_detail = (array)json_decode($post_data['rates_detail']);
+                    if(array_key_exists($rate, $rates_detail)){
+                        $rates_detail[$rate] += 1;
+                    }else{
+                        $rates_detail[$rate] = 1;
+                    }
+
                     $total_rate = ($post_data['likes_count'] * $post_data['total_rate'] + $rate) / $likes_count;
                     $data['status']      = 200;
                     $data['likes_count'] = $likes_count;
@@ -885,7 +892,8 @@ else if($action == 'like_post') {
 
                     cl_update_post_data($post_id, array(
                         'likes_count' => $likes_count,
-                        'total_rate' => $total_rate
+                        'total_rate' => $total_rate,
+                        'rates_detail' => json_encode($rates_detail)
                     ));
 
                     if ($post_data['user_id'] != $me['id']) {
@@ -898,7 +906,16 @@ else if($action == 'like_post') {
                 }
                 else {
                     $likes_count         = $post_data['likes_count'] - 1;
-                    $total_rate = $likes_count == 0 ? 0 : ($post_data['total_rate'] * $post_data['likes_count'] -  cl_get_rate($me['id'], $post_id)) / $likes_count;
+                    $rate = cl_get_rate($me['id'], $post_id);
+                    $total_rate = $likes_count == 0 ? 0 : ($post_data['total_rate'] * $post_data['likes_count'] -  $rate) / $likes_count;
+                    $rates_detail = (array)json_decode($post_data['rates_detail']);
+                    if(is_null($rates_detail))
+                        $rates_detail = [];
+                    if(array_key_exists($rate, $rates_detail)){
+                        $rates_detail[$rate] -= 1;
+                    }else{
+                        $rates_detail[$rate] = 0;
+                    }
                     $db                  = $db->where('pub_id', $post_id);
                     $db                  = $db->where('user_id', $me['id']);
                     $qr                  = $db->delete(T_LIKES);
@@ -909,6 +926,7 @@ else if($action == 'like_post') {
                     cl_update_post_data($post_id, array(
                         'likes_count' => $likes_count,
                         'total_rate' => $total_rate,
+                        'rates_detail' => json_encode($rates_detail)
                     ));
 
                     $db = $db->where('notifier_id', $me['id']);
@@ -934,6 +952,7 @@ else if($action == 'show_likes') {
             $cl['liked_post']  = $post_id;
             $cl['post_likes']  = cl_get_post_likes($post_id, 30);
             $cl['likes_count'] = cl_number($post_data['likes_count']);
+            $cl['rates_detail'] = (array)json_decode($post_data['rates_detail']);
             $data['status']    = 200;
             $data['html']      = cl_template('timeline/modals/likes');
         }

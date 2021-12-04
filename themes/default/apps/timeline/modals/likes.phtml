@@ -14,6 +14,32 @@
                 </div>
                 <div class="modal-body">
                     <?php if (not_empty($cl['post_likes'])): ?>
+                        <div class="rate-statistics">
+                        <table>
+                        <?php
+                            $rates_detail = $cl['rates_detail'];
+                            krsort($rates_detail);
+                            $max = max($rates_detail);
+                            foreach($rates_detail as $key => $rate){
+                                $percent = $rate / $max;
+                                if($percent == 1) $class = '1';
+                                else if($percent >= 0.8) $class = '2';
+                                else if($percent >= 0.6) $class = '3';
+                                else if($percent >= 0.4) $class = '4';
+                                else $class = '5';
+                                echo '<tr>
+                                        <td class="rating-label" style="width: 5%">'.$key;
+                                echo ' <td class="rating-bar">
+                                        <div class="bar-container">
+                                            <div class="bar" style="width:'. ($rate / $max * 100).'%;"></div>
+                                        </div>
+                                    </td>';
+                                echo '<td>'.$rate.'</td></tr>';
+//                                echo '<div class="rate-detail"><span>'.$key.'</span><span class="rate-'.$class.'" style="width:'. ($rate / $max * 90).'%;"></span></div>';
+                            }
+                        ?>
+                        </table>
+                        </div>
                     	<div class="post-likes-ls" data-an="users-ls">
 							<?php foreach ($cl['post_likes'] as $cl['li']): ?>
 								<?php echo cl_template('timeline/includes/like_li'); ?>

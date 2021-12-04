@@ -737,11 +737,11 @@ function cl_get_post_likes($post_id = false, $limit = 10, $offset = false) {
     $sql          = cl_sqltepmlate('components/sql/post/fetch_likes',array(
         't_users' => T_USERS,
         't_likes' => T_LIKES,
+        't_pubs' => T_PUBS,
         'post_id' => $post_id,
         'limit'   => $limit,
         'offset'  => $offset
     ));
-
     $query_result = $db->rawQuery($sql);
 
     if (cl_queryset($query_result)) {
@@ -756,6 +756,7 @@ function cl_get_post_likes($post_id = false, $limit = 10, $offset = false) {
             $row['is_following']     = false;
             $row['follow_requested'] = false;
             $row['is_user']          = false;
+
 
             if (not_empty($cl['is_logged'])) {
                 $row['is_following'] = cl_is_following($cl['me']['id'], $row['id']);
