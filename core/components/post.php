@@ -22,6 +22,7 @@ function cl_create_orphan_post($user_id = null, $type = "text") {
 		"type"    => $type
 	));
 
+
 	return (is_posnum($id)) ? $id : 0;
 }
 

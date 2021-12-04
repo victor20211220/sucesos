@@ -88,7 +88,6 @@ else if ($action == 'upload_post_video') {
         $data['err_code'] = "invalid_req_data";
         $data['status']   = 400;
         $post_data        = $me['draft_post'];
-
         if (not_empty($_FILES['video']) && not_empty($_FILES['video']['tmp_name'])) {
             if (empty($post_data)) {
                 $post_id   = cl_create_orphan_post($me['id'], "video");
@@ -98,7 +97,6 @@ else if ($action == 'upload_post_video') {
                     'last_post' => $post_id
                 ));
             }
-
             if (not_empty($post_data) && $post_data["type"] == "video") {
                 if (empty($post_data['media'])) {
                     $file_info           = array(
@@ -116,13 +114,12 @@ else if ($action == 'upload_post_video') {
                     $file_upload = cl_upload($file_info);
                     $upload_fail = false;
                     $post_id     = $post_data['id'];
-
                     if (not_empty($file_upload['filename'])) {
                         try {
                             require_once(cl_full_path("core/libs/ffmpeg-php/vendor/autoload.php"));
                             require_once(cl_full_path("core/libs/getID3/getid3/getid3.php"));
 
-                            $ffmpeg_binary       = ($config['ffmpeg_binary'] == "/core/libs/ffmpeg/ffmpeg") ? cl_full_path($config['ffmpeg_binary']) : $config['ffmpeg_binary']; 
+                            $ffmpeg_binary       = ($config['ffmpeg_binary'] == "/core/libs/ffmpeg/ffmpeg") ? cl_full_path($config['ffmpeg_binary']) : $config['ffmpeg_binary'];
                             $ffmpeg              = new FFmpeg($ffmpeg_binary);
                             $getID3              = new getID3;
                             $getID3_FAR          = $getID3->analyze($file_upload['filename']);
@@ -139,7 +136,6 @@ else if ($action == 'upload_post_video') {
                                     $poster_frame_offset = 1;
                                 }
                             }
-
                             $ffmpeg->input($file_upload['filename']);
                             $ffmpeg->set('-ss', $poster_frame_offset);
                             $ffmpeg->set('-vframes','1');
@@ -151,7 +147,6 @@ else if ($action == 'upload_post_video') {
                             $data["error"] = $e->getMessage();
                             $upload_fail   = true;
                         }
-
                         if (empty($upload_fail)) {
 
                             if (file_exists($thumb_path) != true) {

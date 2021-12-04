@@ -314,7 +314,7 @@ var pubbox_form_app_mixin = Object({
 			var main_left_sb = $('div[data-app="left-sidebar"]');
 
 			$(_self.target).ajaxSubmit({
-				url: "<?php echo cl_link("native_api/main/publish_new_post"); ?>",
+				url: "<?php echo cl_link('native_api/main/publish_new_post'); ?>",
 				type: 'POST',
 				dataType: 'json',
 				data: {
@@ -340,6 +340,7 @@ var pubbox_form_app_mixin = Object({
 										home_timeline.find('div[data-an="entry-list"]').find('[data-list-item]').first().removeClass('animated fadeIn');
 									}, 1000);
 								});
+								$('.rateit').rateit({});
 							}
 							else {
 								SMColibri.spa_reload();

@@ -8,3 +8,5 @@
 .htaccess
 .ftpquota
 php.ini
+/core/libs/ffmpeg-php/
+/core/libs/ffmpeg/
