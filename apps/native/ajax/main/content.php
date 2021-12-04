@@ -912,9 +912,12 @@ else if($action == 'like_post') {
                     if(is_null($rates_detail))
                         $rates_detail = [];
                     if(array_key_exists($rate, $rates_detail)){
-                        $rates_detail[$rate] -= 1;
+                        $rate_count = $rates_detail[$rate];
+                        if($rate_count == 1)
+                            unset($rates_detail[$rate]);
+                        else $rates_detail[$rate] -= 1;
                     }else{
-                        $rates_detail[$rate] = 0;
+                        unset($rates_detail[$rate]);
                     }
                     $db                  = $db->where('pub_id', $post_id);
                     $db                  = $db->where('user_id', $me['id']);
