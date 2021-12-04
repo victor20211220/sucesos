@@ -34,21 +34,6 @@ body main.main-content-container div.main-content-container-inner div.right-sb-c
 /*    display: inline-block;*/
 /*    height: 18px;*/
 /*}*/
-/*.rate-detail span.rate-1{*/
-/*    background: #79C9A1;*/
-/*}*/
-/*.rate-detail span.rate-2{*/
-/*    background: #AED888;*/
-/*}*/
-/*.rate-detail span.rate-3{*/
-/*    background: #FFD935;*/
-/*}*/
-/*.rate-detail span.rate-4{*/
-/*    background: #FFB235;*/
-/*}*/
-/*.rate-detail span.rate-5{*/
-/*    background: #FF8C5A;*/
-/*}*/
 .rating-label {
     font-weight: bold
 }
@@ -83,4 +68,19 @@ body main.main-content-container div.main-content-container-inner div.right-sb-c
 }
 .rate-statistics table{
     width: 100%;
+}
+.rate-statistics tr:nth-child(1) .bar{
+    background: #79C9A1;
+}
+.rate-statistics tr:nth-child(2) .bar{
+    background: #AED888;
+}
+.rate-statistics tr:nth-child(3) .bar{
+    background: #FFD935;
+}
+.rate-statistics tr:nth-child(4) .bar{
+    background: #FFB235;
+}
+.rate-statistics tr:nth-child(5) .bar{
+    background: #FF8C5A;
 }
